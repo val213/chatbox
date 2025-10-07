@@ -50,6 +50,47 @@ const electronHandler: ElectronIPC = {
     ipcRenderer.on('navigate-to', listener)
     return () => ipcRenderer.off('navigate-to', listener)
   },
+  // 调度器事件监听器
+  onSchedulerTaskCreated: (callback: (task: any) => void) => {
+    const listener = (_event: unknown, task: any) => callback(task)
+    ipcRenderer.on('scheduler:task-created', listener)
+    return () => ipcRenderer.off('scheduler:task-created', listener)
+  },
+  onSchedulerTaskUpdated: (callback: (task: any) => void) => {
+    const listener = (_event: unknown, task: any) => callback(task)
+    ipcRenderer.on('scheduler:task-updated', listener)
+    return () => ipcRenderer.off('scheduler:task-updated', listener)
+  },
+  onSchedulerTaskDeleted: (callback: (taskId: string) => void) => {
+    const listener = (_event: unknown, taskId: string) => callback(taskId)
+    ipcRenderer.on('scheduler:task-deleted', listener)
+    return () => ipcRenderer.off('scheduler:task-deleted', listener)
+  },
+  onSchedulerTaskStarted: (callback: (execution: any) => void) => {
+    const listener = (_event: unknown, execution: any) => callback(execution)
+    ipcRenderer.on('scheduler:task-started', listener)
+    return () => ipcRenderer.off('scheduler:task-started', listener)
+  },
+  onSchedulerTaskCompleted: (callback: (execution: any) => void) => {
+    const listener = (_event: unknown, execution: any) => callback(execution)
+    ipcRenderer.on('scheduler:task-completed', listener)
+    return () => ipcRenderer.off('scheduler:task-completed', listener)
+  },
+  onSchedulerTaskFailed: (callback: (execution: any) => void) => {
+    const listener = (_event: unknown, execution: any) => callback(execution)
+    ipcRenderer.on('scheduler:task-failed', listener)
+    return () => ipcRenderer.off('scheduler:task-failed', listener)
+  },
+  onSchedulerCreateSession: (callback: (sessionData: any) => void) => {
+    const listener = (_event: unknown, sessionData: any) => callback(sessionData)
+    ipcRenderer.on('scheduler:create-session', listener)
+    return () => ipcRenderer.off('scheduler:create-session', listener)
+  },
+  onSchedulerExecuteTaskViaSession: (callback: (taskData: any) => void) => {
+    const listener = (_event: unknown, taskData: any) => callback(taskData)
+    ipcRenderer.on('scheduler:execute-task-via-session', listener)
+    return () => ipcRenderer.off('scheduler:execute-task-via-session', listener)
+  },
 }
 
 contextBridge.exposeInMainWorld('electronAPI', electronHandler)

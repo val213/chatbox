@@ -20,6 +20,7 @@ import { handleDeepLink } from './deeplinks'
 import { parseFile } from './file-parser'
 import Locale from './locales'
 import * as mcpIpc from './mcp/ipc-stdio-transport'
+import { initializeSchedulerIPC } from './scheduler/ipc-handlers'
 import MenuBuilder from './menu'
 import * as proxy from './proxy'
 import {
@@ -387,6 +388,7 @@ if (!gotTheLock) {
     .then(() => {
       createWindow()
       ensureTray()
+      initializeSchedulerIPC()
       // Remove this if your app does not use auto updates
       // eslint-disable-next-line
       app.on('activate', () => {

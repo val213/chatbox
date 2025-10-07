@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/AddCircleOutline'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import ScheduleIcon from '@mui/icons-material/Schedule'
 import SettingsIcon from '@mui/icons-material/Settings'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
 import {
@@ -216,6 +217,28 @@ function SidebarButtons(props: { sessionListRef: React.RefObject<HTMLDivElement>
         </ListItemIcon>
         <ListItemText>
           <Typography>{t('My Copilots')}</Typography>
+        </ListItemText>
+      </MenuItem>
+
+      <MenuItem
+        onClick={() => {
+          navigate({
+            to: '/scheduler',
+          })
+          if (isSmallScreen) {
+            setShowSidebar(false)
+          }
+        }}
+        selected={routerState.location.pathname === '/scheduler'}
+        sx={{ padding: '0.2rem 0.1rem', margin: '0.1rem' }}
+      >
+        <ListItemIcon>
+          <IconButton>
+            <ScheduleIcon fontSize="small" />
+          </IconButton>
+        </ListItemIcon>
+        <ListItemText>
+          <Typography>{t('Scheduled Tasks')}</Typography>
         </ListItemText>
       </MenuItem>
 
